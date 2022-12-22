@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUserTie, FaAlignLeft } from "react-icons/fa";
 import { HiOutlineXMark } from "react-icons/hi2";
+import { UserAuth } from "../../Context/UserContext";
+
 
 const Nav = () => {
   const [open, setOpen] = useState(false);
+    const {name} = useContext(UserAuth)
+    console.log(name.name);
   return (
     <div className="navbar py-5 lg:w-3/4 mx-auto">
       <div className="navbar-start relative">
@@ -36,6 +40,9 @@ const Nav = () => {
         
           <li className="p-3 ">
             <a href="#about">About</a>
+          </li>
+          <li className="p-3 ">
+            <a href="#about"></a>
           </li>
   
           <li>

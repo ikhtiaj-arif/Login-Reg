@@ -2,7 +2,7 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login&registration/Login";
 import Registration from "../Pages/Login&registration/Registration";
-const { createBrowserRouter } = require("react-router-dom");
+import { createBrowserRouter } from 'react-router-dom'
 
 
 

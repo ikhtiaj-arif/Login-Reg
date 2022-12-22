@@ -3,12 +3,21 @@ import { Link } from "react-router-dom";
 import { FaUserTie, FaAlignLeft } from "react-icons/fa";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { UserAuth } from "../../Context/UserContext";
+import toast from "react-hot-toast";
 
 
 const Nav = () => {
   const [open, setOpen] = useState(false);
-    const {name} = useContext(UserAuth)
-    console.log(name.name);
+    const { user, logOutUser } = useContext(UserAuth)
+
+    const handleLogOut = () => {
+      logOutUser()
+        .then(() => {
+          toast.success("Log Out Successful!")
+        })
+        .catch((e) => console.log(e));
+    };
+
   return (
     <div className="navbar py-5 lg:w-3/4 mx-auto">
       <div className="navbar-start relative">
@@ -46,11 +55,40 @@ const Nav = () => {
           </li>
   
           <li>
+            {user && user.uid ? (
+                <div className="flex items-center ">
+                  {user.photoURL ? (
+                    <div className="relative">
+                      <img
+                        className="w-10 rounded-full"
+                        src={user.photoURL}
+                        alt=""
+                      />
+                      <div className="absolute text-gray-800 top-0 left-0 opacity-0 hover:opacity-100 transition duration-300 ease-in-out">
+                        {user.displayName}
+                      </div>
+                    </div>
+                  ) : (
+                    <FaUserTie className="w-10 text-xl rounded-full"></FaUserTie>
+                  )}
+                  <div className="w-2/4">
+
+                  <button
+                    
+                    onClick={handleLogOut}
+                    title='Logout'
+                    >logout</button>
+                    </div>
+                    
+                 
+                </div>
+              ) : (
             <div className="w-2/4 lg:w-full">
               <button title="  Login" className="btn btn-success">
                 Login
               </button>
             </div>
+              )}
           </li>
         </ul>
       </div>
